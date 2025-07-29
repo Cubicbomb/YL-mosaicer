@@ -1,0 +1,4 @@
+ultralytics==8.0.0
+opencv-python==4.8.0.76
+numpy<2.0  # Restrict to NumPy 1.x series
+numpy>=1.26.0  # 适配Python 3.13的版本
