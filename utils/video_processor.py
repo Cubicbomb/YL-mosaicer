@@ -1,5 +1,5 @@
-import os
 import cv2
+import os
 from tqdm import tqdm
 
 class VideoProcessor:
@@ -10,7 +10,13 @@ class VideoProcessor:
         self.fps = self.cap.get(cv2.CAP_PROP_FPS)
         self.width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         self.height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        self.output_path = os.path.join(output_dir, "output_blurred.mp4")
+        
+        # 基于输入文件名生成输出文件名
+        input_filename = os.path.basename(input_path)
+        filename_without_ext = os.path.splitext(input_filename)[0]
+        output_filename = f"{filename_without_ext}_blurred.mp4"
+        self.output_path = os.path.join(output_dir, output_filename)
+        
         self.fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         self.out = cv2.VideoWriter(self.output_path, self.fourcc, self.fps, (self.width, self.height))
         # 获取视频总帧数
